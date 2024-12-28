@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import {
   CCard,
   CCardBody,
@@ -16,6 +17,26 @@ import {
 import { DocsComponents, DocsExample } from 'src/components'
 
 const Tables = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // API 호출 함수
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/api/items/1/");
+        setData(response.data); // 데이터 설정
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <CRow>
       <CCol xs={12}>
@@ -54,8 +75,8 @@ const Tables = () => {
                   </CTableRow>
                   <CTableRow>
                     <CTableHeaderCell scope="row">3</CTableHeaderCell>
-                    <CTableDataCell colSpan={2}>Larry the Bird</CTableDataCell>
-                    <CTableDataCell>@twitter</CTableDataCell>
+                    <CTableDataCell colSpan={2}>{data.description}</CTableDataCell>
+                    <CTableDataCell>{data.name}</CTableDataCell>
                   </CTableRow>
                 </CTableBody>
               </CTable>
