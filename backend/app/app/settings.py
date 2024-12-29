@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -83,7 +84,7 @@ DATABASES = {
         "NAME": "tnm",
         "USER": "root",
         "PASSWORD": "rootpassword",
-        "HOST": "127.0.0.1",  # 원격 서버 사용 시 MySQL 서버 주소 입력
+        "HOST": os.getenv("DB_HOST", "127.0.0.1"),
         "PORT": "3306",  # 기본 포트
     }
 }
