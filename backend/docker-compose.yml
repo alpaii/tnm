@@ -1,0 +1,13 @@
+services:
+  backend:
+    build:
+      context: .
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./app:/usr/src/app  # 로컬 코드를 컨테이너와 동기화
+    ports:
+      - "8000:8000"  # 호스트와 컨테이너 포트 매핑
+    environment:
+      - DB_HOST=host.docker.internal
