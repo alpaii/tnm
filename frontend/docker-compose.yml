@@ -1,0 +1,10 @@
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "3000:3000"   # 호스트와 컨테이너 포트 매핑
+    volumes:
+      - ./app:/usr/src/app  # 로컬 코드와 컨테이너 코드 동기화
+      - /usr/src/app/node_modules # 컨테이너의 node_modules는 로컬에 영향을 받지 않음
+    command: "npm start"    # 애플리케이션 시작 명령
