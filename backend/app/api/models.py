@@ -54,7 +54,7 @@ class Transaction(models.Model):
     account = models.ForeignKey(
         Account, on_delete=models.CASCADE, related_name="transactions"
     )
-    date = models.DateTimeField()
+    date = models.DateField()  # DateTimeField -> DateField
     amount = models.BigIntegerField()
     name = models.CharField(max_length=255)
     category_detail = models.ForeignKey(
