@@ -54,7 +54,11 @@ import WidgetsBrand from '../widgets/WidgetsBrand'
 import WidgetsDropdown from '../widgets/WidgetsDropdown'
 import MainChart from './MainChart'
 
+import { useTranslation } from 'react-i18next'
+
 const Dashboard = () => {
+  const { t } = useTranslation();
+
   const progressExample = [
     { title: 'Visits', value: '29.703 Users', percent: 40, color: 'success' },
     { title: 'Unique', value: '24.093 Users', percent: 20, color: 'info' },
@@ -184,7 +188,7 @@ const Dashboard = () => {
           <CRow>
             <CCol sm={5}>
               <h4 id="traffic" className="card-title mb-0">
-                Traffic
+                Traffic - {t('welcome')}
               </h4>
               <div className="small text-body-secondary">January - July 2023</div>
             </CCol>

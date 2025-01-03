@@ -23,10 +23,14 @@ import {
   cilMenu,
   cilMoon,
   cilSun,
+  cifKr,
+  cifUs,
+  cifJp,
 } from '@coreui/icons'
 
 import { AppBreadcrumb } from './index'
 import { AppHeaderDropdown } from './header/index'
+import { useTranslation } from "react-i18next"
 
 const AppHeader = () => {
   const headerRef = useRef()
@@ -34,6 +38,13 @@ const AppHeader = () => {
 
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
+
+  const { i18n } = useTranslation()
+
+  // 언어 변경 함수
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang)
+  }
 
   useEffect(() => {
     document.addEventListener('scroll', () => {
@@ -65,6 +76,33 @@ const AppHeader = () => {
           </CNavItem>
         </CHeaderNav>
         <CHeaderNav className="ms-auto">
+
+          <CNavItem>
+            <CDropdown>
+              {/* 드롭다운 버튼 */}
+              <CDropdownToggle color="info" className="text-white">
+                <CIcon icon={cifKr} size="lg" />
+              </CDropdownToggle>
+
+              {/* 드롭다운 메뉴 */}
+              <CDropdownMenu>
+                {/* 한국어 선택 */}
+                <CDropdownItem onClick={() => changeLanguage("ko")}>
+                  <CIcon icon={cifKr} size="lg" className="me-2 border border-secondary" />
+                </CDropdownItem>
+
+                {/* 영어 선택 */}
+                <CDropdownItem onClick={() => changeLanguage("us")}>
+                  <CIcon icon={cifUs} size="lg" className="me-2 border border-secondary" />
+                </CDropdownItem>
+
+                {/* 일본어 선택 */}
+                <CDropdownItem onClick={() => changeLanguage("jp")}>
+                  <CIcon icon={cifJp} size="lg" className="me-2 border border-secondary" />
+                </CDropdownItem>
+              </CDropdownMenu>
+            </CDropdown>
+          </CNavItem>
           <CNavItem>
             <CNavLink href="#">
               <CIcon icon={cilBell} size="lg" />
