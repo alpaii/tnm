@@ -59,8 +59,12 @@ const Accounts = () => {
                   {item.type === "Card" && <CBadge color="success" className="me-2">Card</CBadge>}
                   {item.name}
                 </CTableDataCell>
-                <CTableDataCell className="text-end">{item.balance}</CTableDataCell>
-                <CTableDataCell className="text-center"><CButton color="info" size="sm">Add</CButton></CTableDataCell>
+                <CTableDataCell className="text-end">{item.balance.toLocaleString()}</CTableDataCell>
+                <CTableDataCell className="text-center">
+                  <CButton color="info" size="sm" className="text-white me-3">수입</CButton>
+                  <CButton color="danger" size="sm" className="text-white me-3">지출</CButton>
+                  <CButton color="warning" size="sm" className="text-white">이체</CButton>
+                </CTableDataCell>
               </CTableRow>
             ))}
           </CTableBody>
