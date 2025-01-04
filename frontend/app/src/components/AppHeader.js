@@ -80,25 +80,25 @@ const AppHeader = () => {
           <CNavItem>
             <CDropdown>
               {/* 드롭다운 버튼 */}
-              <CDropdownToggle color="info" className="text-white">
+              <CDropdownToggle color="secondary" className="text-white">
                 <CIcon icon={cifKr} size="lg" />
               </CDropdownToggle>
 
               {/* 드롭다운 메뉴 */}
-              <CDropdownMenu>
+              <CDropdownMenu className="custom-dropdown-menu">
                 {/* 한국어 선택 */}
                 <CDropdownItem onClick={() => changeLanguage("ko")}>
-                  <CIcon icon={cifKr} size="lg" className="me-2 border border-secondary" />
+                  <CIcon icon={cifKr} size="lg" />
                 </CDropdownItem>
 
                 {/* 영어 선택 */}
                 <CDropdownItem onClick={() => changeLanguage("us")}>
-                  <CIcon icon={cifUs} size="lg" className="me-2 border border-secondary" />
+                  <CIcon icon={cifUs} size="lg" />
                 </CDropdownItem>
 
                 {/* 일본어 선택 */}
                 <CDropdownItem onClick={() => changeLanguage("jp")}>
-                  <CIcon icon={cifJp} size="lg" className="me-2 border border-secondary" />
+                  <CIcon icon={cifJp} size="lg" />
                 </CDropdownItem>
               </CDropdownMenu>
             </CDropdown>

@@ -14,3 +14,8 @@ body {
 .table-tnm td {
   padding: 6px 16px;
 }
+.custom-dropdown-menu {
+  min-width: 60px !important;  /* 최소 폭을 강제로 100px로 설정 */
+  width: auto;                  /* 내용에 맞춰 크기 조정 */
+  background-color: lightgray !important;
+}
