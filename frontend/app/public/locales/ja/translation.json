@@ -1,0 +1,7 @@
+{
+    "name": "名前",
+    "balance": "残高",
+    "income": "収入",
+    "expense": "支出",
+    "transfer": "振込"
+}

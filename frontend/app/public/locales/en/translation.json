@@ -1,4 +1,7 @@
 {
-  "welcome": "Welcome to CoreUI!",
-  "logout": "Logout"
+    "name": "Name",
+    "balance": "Balance",
+    "income": "Income",
+    "expense": "Expense",
+    "transfer": "Transfer"
 }

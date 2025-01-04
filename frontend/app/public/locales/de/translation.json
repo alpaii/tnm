@@ -1,0 +1,7 @@
+{
+    "name": "Name",
+    "balance": "Kontostand",
+    "income": "Einkommen",
+    "expense": "Ausgabe",
+    "transfer": "Überweisung"
+}
