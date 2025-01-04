@@ -29,6 +29,16 @@ const _nav = [
   },
   {
     component: CNavTitle,
+    name: 'Money',
+  },
+  {
+    component: CNavItem,
+    name: 'Accounts',
+    to: '/money/accounts',
+    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavTitle,
     name: 'Theme',
   },
   {

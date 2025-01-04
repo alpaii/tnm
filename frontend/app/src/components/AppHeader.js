@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -23,10 +23,19 @@ import {
   cilMenu,
   cilMoon,
   cilSun,
+  cifUs,
+  cifFr,
+  cifDe,
+  cifIt,
+  cifEs,
+  cifKr,
+  cifCn,
+  cifJp,
 } from '@coreui/icons'
 
 import { AppBreadcrumb } from './index'
 import { AppHeaderDropdown } from './header/index'
+import { useTranslation } from "react-i18next"
 
 const AppHeader = () => {
   const headerRef = useRef()
@@ -34,6 +43,19 @@ const AppHeader = () => {
 
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
+
+  const { i18n } = useTranslation()
+
+  const [selectedIcon, setSelectedIcon] = useState(cifKr) // 기본 국기: 한국
+  const [selectedLanguage, setSelectedLanguage] = useState('ko') // 기본 언어: 한국어
+
+  // 언어 변경 함수
+  const changeLanguage = (lang, icon) => {
+    setSelectedLanguage(lang)
+    setSelectedIcon(icon)
+
+    i18n.changeLanguage(lang)
+  }
 
   useEffect(() => {
     document.addEventListener('scroll', () => {
@@ -65,6 +87,58 @@ const AppHeader = () => {
           </CNavItem>
         </CHeaderNav>
         <CHeaderNav className="ms-auto">
+
+          <CNavItem>
+            <CDropdown>
+              {/* 드롭다운 버튼 */}
+              <CDropdownToggle className="custom-dropdown-toggle">
+                <CIcon icon={selectedIcon} size="lg" />
+              </CDropdownToggle>
+
+              {/* 드롭다운 메뉴 */}
+              <CDropdownMenu className="custom-dropdown-menu">
+                {/* 영어 선택 */}
+                <CDropdownItem onClick={() => changeLanguage("en", cifUs)}>
+                  <CIcon icon={cifUs} size="lg" />
+                </CDropdownItem>
+
+                {/* 프랑스어 선택 */}
+                <CDropdownItem onClick={() => changeLanguage("fr", cifFr)}>
+                  <CIcon icon={cifFr} size="lg" />
+                </CDropdownItem>
+
+                {/* 독일어 선택 */}
+                <CDropdownItem onClick={() => changeLanguage("de", cifDe)}>
+                  <CIcon icon={cifDe} size="lg" />
+                </CDropdownItem>
+
+                {/* 이탈리아어 선택 */}
+                <CDropdownItem onClick={() => changeLanguage("it", cifIt)}>
+                  <CIcon icon={cifIt} size="lg" />
+                </CDropdownItem>
+
+                {/* 스페인어 선택 */}
+                <CDropdownItem onClick={() => changeLanguage("es", cifEs)}>
+                  <CIcon icon={cifEs} size="lg" />
+                </CDropdownItem>
+
+                {/* 한국어 선택 */}
+                <CDropdownItem onClick={() => changeLanguage("ko", cifKr)}>
+                  <CIcon icon={cifKr} size="lg" />
+                </CDropdownItem>
+
+                {/* 중국어 선택 */}
+                <CDropdownItem onClick={() => changeLanguage("zh", cifCn)}>
+                  <CIcon icon={cifCn} size="lg" />
+                </CDropdownItem>
+
+                {/* 일본어 선택 */}
+                <CDropdownItem onClick={() => changeLanguage("ja", cifJp)}>
+                  <CIcon icon={cifJp} size="lg" />
+                </CDropdownItem>
+              </CDropdownMenu>
+            </CDropdown>
+          </CNavItem>
           <CNavItem>
             <CNavLink href="#">
               <CIcon icon={cilBell} size="lg" />

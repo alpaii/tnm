@@ -1,1 +1,32 @@
-// Here you can add other styles
+$custom-font-family: 'Noto Sans KR', Arial, sans-serif;
+
+body {
+  font-family: $custom-font-family;
+}
+
+.table-tnm {
+  table-layout: fixed;
+  /* 테이블 레이아웃 고정 */
+  width: auto !important;
+  /* 기존 설정 무시 */
+}
+
+.table-tnm th {
+  text-align: center;
+}
+
+.table-tnm td {
+  padding: 6px 16px;
+}
+
+.custom-dropdown-toggle {
+  background-color: lightgray !important;
+}
+
+.custom-dropdown-menu {
+  min-width: 60px !important;
+  /* 최소 폭을 강제로 100px로 설정 */
+  width: auto;
+  /* 내용에 맞춰 크기 조정 */
+  background-color: lightgray !important;
+}
