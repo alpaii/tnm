@@ -16,8 +16,12 @@ import { useTranslation } from 'react-i18next'
 
 const Accounts = () => {
   const apiUrl = import.meta.env.VITE_API_URL
+
   const { t } = useTranslation();
+
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     // API 호출 함수
