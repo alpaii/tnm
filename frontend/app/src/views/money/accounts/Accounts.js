@@ -20,6 +20,8 @@ import { DocsComponents, DocsExample } from 'src/components'
 import { useTranslation } from 'react-i18next'
 
 const Accounts = () => {
+  const apiUrl = import.meta.env.VITE_API_URL
+
   const { t } = useTranslation();
 
   const [data, setData] = useState([]);
@@ -30,8 +32,7 @@ const Accounts = () => {
     // API 호출 함수
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/accounts/"); // API 호출
-        // const response = await axios.get("http://192.168.50.183:8000/api/accounts/"); // API 호출
+        const response = await axios.get(apiUrl + "/api/accounts/"); // API 호출
         setData(response.data); // 데이터 설정
       } catch (error) {
         setError(error.message);
