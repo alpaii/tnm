@@ -2,3 +2,4 @@ db/db_data/*
 !db/db_data/
 __pycache__/
 node_modules/
+frontend/app/.env
