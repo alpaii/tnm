@@ -3,14 +3,11 @@ import axios from "axios";
 import {
   CCol,
   CRow,
-  CTable,
-  CTableBody,
-  CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
-  CTableRow,
+  CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow,
   CBadge,
   CButton,
+  CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle,
+  CFormInput, CFormLabel
 } from '@coreui/react'
 import { useTranslation } from 'react-i18next'
 
@@ -22,6 +19,8 @@ const Accounts = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
     // API 호출 함수
@@ -42,6 +41,61 @@ const Accounts = () => {
   return (
     <CRow>
       <CCol style={{ overflowX: "auto", maxWidth: "100%" }}>
+        <CButton color="info" size="sm" className="text-white mb-2" onClick={() => setVisible(!visible)}>추가</CButton>
+        <CModal
+          alignment="center"
+          visible={visible}
+          onClose={() => setVisible(false)}
+          aria-labelledby="VerticallyCenteredExample"
+        >
+          <CModalHeader>
+            <CModalTitle id="VerticallyCenteredExample">Modal title</CModalTitle>
+          </CModalHeader>
+          <CModalBody>
+            <CRow className="mb-3">
+              <CFormLabel htmlFor="colFormLabelSm" className="col-sm-2 col-form-label col-form-label-sm">
+                Email
+              </CFormLabel>
+              <CCol sm={10}>
+                <CFormInput
+                  type="email"
+                  className="form-control form-control-sm"
+                  id="colFormLabelSm"
+                  placeholder="col-form-label-sm"
+                />
+              </CCol>
+            </CRow>
+            <CRow className="mb-3">
+              <CFormLabel htmlFor="colFormLabel" className="col-sm-2 col-form-label">
+                Email
+              </CFormLabel>
+              <CCol sm={10}>
+                <CFormInput type="email" id="colFormLabel" placeholder="col-form-label" />
+              </CCol>
+            </CRow>
+            <CRow>
+              <CFormLabel htmlFor="colFormLabelLg" className="col-sm-2 col-form-label col-form-label-lg">
+                Email
+              </CFormLabel>
+              <CCol sm={10}>
+                <CFormInput
+                  type="email"
+                  className="form-control form-control-lg"
+                  id="colFormLabelLg"
+                  placeholder="col-form-label-lg"
+                />
+              </CCol>
+            </CRow>
+
+          </CModalBody>
+          <CModalFooter>
+            <CButton color="secondary" onClick={() => setVisible(false)}>
+              Close
+            </CButton>
+            <CButton color="primary">Save changes</CButton>
+          </CModalFooter>
+        </CModal>
+
         <CTable bordered striped small className="table-tnm">
           <CTableHead color="info">
             <CTableRow>
