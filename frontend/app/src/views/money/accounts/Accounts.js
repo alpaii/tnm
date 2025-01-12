@@ -10,6 +10,8 @@ import {
   CFormInput, CFormLabel
 } from '@coreui/react'
 import { useTranslation } from 'react-i18next'
+import { CommaInput, AccountTypeSelect } from '../../../components/index'
+import { removeCommas } from '../../../utils/formatUtils'
 
 const Accounts = () => {
   const apiUrl = import.meta.env.VITE_API_URL
@@ -21,27 +23,59 @@ const Accounts = () => {
   const [error, setError] = useState(null);
 
   const [visible, setVisible] = useState(false)
+  const [accountName, setAccountName] = useState("")
+  const [accountType, setAccountType] = useState("Bank")
+  const [accountBalance, setAccountBalance] = useState("")
 
   useEffect(() => {
-    // API 호출 함수
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(apiUrl + "/api/accounts/"); // API 호출
-        setData(response.data); // 데이터 설정
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
+    // account list
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(apiUrl + "/api/accounts/"); // API 호출
+      setData(response.data); // 데이터 설정
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // add account
+  const addAccount = async () => {
+    try {
+      const response = await axios.post(apiUrl + "/api/accounts/", {
+        name: accountName,
+        type: accountType,
+        balance: removeCommas(accountBalance),
+      }); // API 호출
+      setVisible(false)
+      fetchData();
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleAccountNameChange = (e) => {
+    setAccountName(e.target.value)
+  }
+
+  const handleAccountTypeChange = (e) => {
+    setAccountType(e.target.value)
+  }
+
+  const handleAccountBalanceChange = (e, formattedValue) => {
+    setAccountBalance(formattedValue)
+  }
 
   return (
     <CRow>
       <CCol style={{ overflowX: "auto", maxWidth: "100%" }}>
-        <CButton color="info" size="sm" className="text-white mb-2" onClick={() => setVisible(!visible)}>추가</CButton>
+        <CButton color="primary" size="sm" className="text-white mb-2" onClick={() => setVisible(!visible)}>추가</CButton>
         <CModal
           alignment="center"
           visible={visible}
@@ -49,50 +83,39 @@ const Accounts = () => {
           aria-labelledby="VerticallyCenteredExample"
         >
           <CModalHeader>
-            <CModalTitle id="VerticallyCenteredExample">Modal title</CModalTitle>
+            <CModalTitle id="VerticallyCenteredExample">계좌 추가</CModalTitle>
           </CModalHeader>
           <CModalBody>
             <CRow className="mb-3">
-              <CFormLabel htmlFor="colFormLabelSm" className="col-sm-2 col-form-label col-form-label-sm">
-                Email
+              <CFormLabel htmlFor="accountName" className="col-sm-2 col-form-label">
+                이름
               </CFormLabel>
-              <CCol sm={10}>
-                <CFormInput
-                  type="email"
-                  className="form-control form-control-sm"
-                  id="colFormLabelSm"
-                  placeholder="col-form-label-sm"
-                />
+              <CCol>
+                <CFormInput type="text" id="accountName" className="col-sm-10" value={accountName} onChange={handleAccountNameChange} />
               </CCol>
             </CRow>
             <CRow className="mb-3">
-              <CFormLabel htmlFor="colFormLabel" className="col-sm-2 col-form-label">
-                Email
+              <CFormLabel htmlFor="accountType" className="col-sm-2 col-form-label">
+                타입
               </CFormLabel>
-              <CCol sm={10}>
-                <CFormInput type="email" id="colFormLabel" placeholder="col-form-label" />
+              <CCol>
+                <AccountTypeSelect id="accountType" className="col-sm-10" value={accountType} onChange={handleAccountTypeChange} />
               </CCol>
             </CRow>
-            <CRow>
-              <CFormLabel htmlFor="colFormLabelLg" className="col-sm-2 col-form-label col-form-label-lg">
-                Email
+            <CRow className="mb-3">
+              <CFormLabel htmlFor="accountBalance" className="col-sm-2 col-form-label">
+                잔액
               </CFormLabel>
-              <CCol sm={10}>
-                <CFormInput
-                  type="email"
-                  className="form-control form-control-lg"
-                  id="colFormLabelLg"
-                  placeholder="col-form-label-lg"
-                />
+              <CCol>
+                <CommaInput id="accountBalance" className="col-sm-10" value={accountBalance} onChange={handleAccountBalanceChange} />
               </CCol>
             </CRow>
-
           </CModalBody>
           <CModalFooter>
             <CButton color="secondary" onClick={() => setVisible(false)}>
-              Close
+              닫기
             </CButton>
-            <CButton color="primary">Save changes</CButton>
+            <CButton color="primary" onClick={() => addAccount()}>추가</CButton>
           </CModalFooter>
         </CModal>
 
