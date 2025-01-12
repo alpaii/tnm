@@ -10,6 +10,7 @@ import DocsLink from './DocsLink'
 import DocsExample from './DocsExample'
 
 import CommaInput from './custom/CommaInput'
+import AccountTypeSelect from './custom/AccountTypeSelect'
 
 export {
   AppBreadcrumb,
@@ -23,4 +24,5 @@ export {
   DocsLink,
   DocsExample,
   CommaInput,
+  AccountTypeSelect,
 }
