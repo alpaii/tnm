@@ -9,6 +9,8 @@ import DocsIcons from './DocsIcons'
 import DocsLink from './DocsLink'
 import DocsExample from './DocsExample'
 
+import CommaInput from './custom/CommaInput'
+
 export {
   AppBreadcrumb,
   AppContent,
@@ -20,4 +22,5 @@ export {
   DocsIcons,
   DocsLink,
   DocsExample,
+  CommaInput,
 }
